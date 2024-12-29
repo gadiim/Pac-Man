@@ -1,0 +1,154 @@
+npm install http-server --save-dev
+
+{
+    "front view": {
+        "right": [
+            "eye": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "9"
+                }
+            }
+        ],
+        "left": [
+            "eye": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "9"
+                }
+            }
+        ]
+    },
+    "left view": {
+        "right": [
+            "eye": {
+                "position:" {
+                    "x": "3.5",
+                    "y": "5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "4.5",
+                    "y": "9"
+                }
+            }
+        ],
+        "left": [
+            "eye": {
+                "position:" {
+                    "x": "2",
+                    "y": "5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "1.75",
+                    "y": "9"
+                }
+            }
+        ]
+    },
+    "right view": {
+        "right": [
+            "eye": {
+                "position:" {
+                    "x": "2",
+                    "y": "5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "1.75",
+                    "y": "9"
+                }
+            }
+        ],
+        "left": [
+            "eye": {
+                "position:" {
+                    "x": "3.5",
+                    "y": "5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "4.5",
+                    "y": "9"
+                }
+            }
+        ]
+    },
+    "up view": {
+        "right": [
+            "eye": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "2.5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "1.75"
+                }
+            }
+        ],
+        "left": [
+            "eye": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "2.5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "1.75"
+                }
+            }
+        ]
+    },
+    "down view": {
+        "right": [
+            "eye": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "7.5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "-15"
+                }
+            }
+        ],
+        "left": [
+            "eye": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "7.5"
+                }
+            },
+            "pupil": {
+                "position:" {
+                    "x": "2.5",
+                    "y": "-15"
+                }
+            }
+        ]
+    }
+}
