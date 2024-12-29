@@ -17,7 +17,7 @@ import {
     leftWarpTunnelPositionX,
     leftWarpTunnelPositionY,
     map
-} from './map.js';
+} from './maze/mapOrigin.js';
 
 const beginBeepSound = new Audio('./assets/sounds/begin-beep.wav');
 const pluckSound = new Audio('./assets/sounds/pluck.wav');
