@@ -45,4 +45,4 @@ Pac-Man/
 You can play the game at: [https://gadiim.github.io/Pac-Man/](https://gadiim.github.io/Pac-Man/)
 
 ## License
-This project is licensed under the ISC License.
+This project is licensed under the [MIT LICENSE](./LICENSE.txt).
