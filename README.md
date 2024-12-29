@@ -44,6 +44,12 @@ Pac-Man/
 - `npm start`: Start the development server.
 - `npm install`: Install dependencies.
 
+## Controls
+- **W**: Move up
+- **A**: Move left
+- **S**: Move down
+- **D**: Move right
+- 
 ## GitHub Pages
 You can play the [game](https://gadiim.github.io/Pac-Man/)
 
