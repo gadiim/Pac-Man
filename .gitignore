@@ -34,3 +34,5 @@ Thumbs.db
 
 # Ignore specific file
 src/keyboard/inputHandlers.js
+src/collisions/collisions.js
+ghost_eyes_position.txt
