@@ -3,6 +3,7 @@
 
 ## Objective
 Pac-Man is a classic arcade game where the player navigates Pac-Man through a maze, eating pellets and avoiding ghosts. This project is a web-based implementation of the game using JavaScript, HTML, and CSS.
+
 ![gameClip](.images/gameClip.gif)
 
 ## Tools
