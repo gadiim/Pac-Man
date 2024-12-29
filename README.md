@@ -49,7 +49,7 @@ Pac-Man/
 - **A**: Move left
 - **S**: Move down
 - **D**: Move right
-- 
+
 ## GitHub Pages
 You can play the [game](https://gadiim.github.io/Pac-Man/)
 
