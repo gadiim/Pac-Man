@@ -15,7 +15,23 @@ Create a Pac-Man game using JavaScript, HTML, and CSS.
 ## Project Structure
    ```sql
 Pac-Man/
-├── .github/ │ └── workflows/ │ └── ci.yml ├── src/ │ ├── assets/ │ ├── keyboard/ │ │ └── inputHandlers.js │ ├── index.html │ ├── index.js │ └── styles.css ├── .gitignore ├── package.json └── README.md
+├── .github/
+│ └── workflows/
+│ └── ci.yml
+├── src/
+│ ├── assets/
+│ ├── classes/
+│ │ ├── boundary.js
+│ │ ├── ghost.js
+│ │ └── powerPellet.js
+│ ├── keyboard/
+│ │ └── inputHandlers.js
+│ ├── index.html
+│ ├── index.js
+│ └── styles.css
+├── .gitignore
+├── package.json
+└── README.md
   ```
 ## Scripts
 - `npm start`: Start the development server.
