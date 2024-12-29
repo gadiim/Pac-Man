@@ -24,8 +24,12 @@ Pac-Man/
 │ │ ├── boundary.js
 │ │ ├── ghost.js
 │ │ └── powerPellet.js
+│ ├── collisions/
+│ │ └── collisions.js
 │ ├── keyboard/
 │ │ └── inputHandlers.js
+│ ├── maze/
+│ │ └── mapOrigin.js
 │ ├── index.html
 │ ├── index.js
 │ └── styles.css
