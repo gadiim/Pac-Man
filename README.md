@@ -2,7 +2,7 @@
 # Pac-Man
 
 ## Objective
-Create a Pac-Man game using JavaScript, HTML, and CSS.
+Pac-Man is a classic arcade game where the player navigates Pac-Man through a maze, eating pellets and avoiding ghosts. This project is a web-based implementation of the game using JavaScript, HTML, and CSS.
 
 ## Tools
 - **JavaScript**: For game logic and interactivity.
