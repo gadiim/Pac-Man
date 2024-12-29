@@ -5,9 +5,6 @@
 ![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue.svg)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow.svg)
 ![Node.js](https://img.shields.io/badge/Node.js-v20-green.svg)
-![Version](https://img.shields.io/badge/version-0.0.2-blue.svg)
-![Dev Dependencies](https://img.shields.io/david/dev/gadiim/Pac-Man.svg)
-
 
 ## About
 Pac-Man is a classic arcade game where the player navigates Pac-Man through a maze, eating pellets and avoiding ghosts. This project is a web-based implementation of the game using JavaScript, HTML, and CSS.
