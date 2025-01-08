@@ -25,7 +25,7 @@ import {
 } from './keyboard/inputHandlers.js';
 import { 
     circleColladesWithRectangle, 
-    pacmanColladesWithGhost, 
+    // pacmanColladesWithGhost, 
     pacmanColladesWithPellets, 
     pacmanColladesWithPowerPellets
 } from './collisions/collisions.js';
@@ -501,28 +501,28 @@ function animate() {
     // }
     //
     // detect collision between ghost & pac-man
-    pacmanColladesWithGhost(pacman, ghosts, loseSound, animationId);
-    // for (let i = ghosts.length - 1; i >= 0; i--) {
-    //     const ghost = ghosts[i]
-    //     // ghost touches pac-man
-    //     if (Math.hypot(                             // calculates distance between (0,0) and (x,y)
-    //         ghost.position.x - pacman.position.x,
-    //         ghost.position.y - pacman.position.y
-    //     ) < ghost.radius + pacman.radius
-    //     ) {
-    //         if (ghost.scared) {
-    //             ghosts.splice(i, 1);
-    //             scoreCounter += 200;                // 200 pts for every power ghost
-    //             const score = document.getElementById('score')
-    //             score.innerText = scoreCounter
-    //         }
-    //         else {
-    //             isGame = false;
-    //             loseSound.play()                    // sound           
-    //             cancelAnimationFrame(animationId)   // stop animation  
-    //         }
-    //     }
-    // }
+    // pacmanColladesWithGhost(pacman, ghosts, loseSound, animationId);
+    for (let i = ghosts.length - 1; i >= 0; i--) {
+        const ghost = ghosts[i]
+        // ghost touches pac-man
+        if (Math.hypot(                             // calculates distance between (0,0) and (x,y)
+            ghost.position.x - pacman.position.x,
+            ghost.position.y - pacman.position.y
+        ) < ghost.radius + pacman.radius
+        ) {
+            if (ghost.scared) {
+                ghosts.splice(i, 1);
+                scoreCounter += 200;                // 200 pts for every power ghost
+                const score = document.getElementById('score')
+                score.innerText = scoreCounter
+            }
+            else {
+                isGame = false;
+                loseSound.play()                    // sound           
+                cancelAnimationFrame(animationId)   // stop animation  
+            }
+        }
+    }
     //
     // draw boundaries
     boundaries.forEach((boundary) => {
