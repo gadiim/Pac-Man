@@ -25,7 +25,7 @@ import {
 } from './keyboard/inputHandlers.js';
 import { 
     circleColladesWithRectangle, 
-    // pacmanColladesWithGhost, 
+    pacmanColladesWithGhost, 
     pacmanColladesWithPellets, 
     pacmanColladesWithPowerPellets
 } from './collisions/collisions.js';
