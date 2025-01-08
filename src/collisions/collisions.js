@@ -48,6 +48,7 @@ function pacmanColladesWithGhost(pacman, ghosts, loseSound, animationId) {
                 isGame = false;
                 loseSound.play()                    // sound           
                 cancelAnimationFrame(animationId)   // stop animation  
+                return;
             }
         }
     }
