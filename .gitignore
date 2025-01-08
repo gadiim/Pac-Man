@@ -33,5 +33,5 @@ build/
 Thumbs.db
 
 # Ignore specific file
-src/keyboard/inputHandlers.js
-src/collisions/collisions.js
+# src/keyboard/inputHandlers.js
+# src/collisions/collisions.js
