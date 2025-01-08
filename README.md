@@ -28,9 +28,14 @@ Pac-Man/
 │ └── ci.yml
 ├── src/
 │ ├── assets/
+│ │ ├── favicon/
+│ │ ├── img/
+│ │ ├── sounds/
 │ ├── classes/
 │ │ ├── boundary.js
 │ │ ├── ghost.js
+│ │ ├── pacman.js
+│ │ ├── pellet.js
 │ │ └── powerPellet.js
 │ ├── collisions/
 │ │ └── collisions.js
@@ -40,8 +45,10 @@ Pac-Man/
 │ │ └── mapOrigin.js
 │ ├── index.html
 │ ├── index.js
+│ ├── settings.js
 │ └── styles.css
 ├── .gitignore
+├── package-lock.json
 ├── package.json
 └── README.md
   ```

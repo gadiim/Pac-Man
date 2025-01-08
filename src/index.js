@@ -18,6 +18,17 @@ import {
     leftWarpTunnelPositionY,
     map
 } from './maze/mapOrigin.js';
+import { 
+    keys,
+    handleKeyDown, 
+    handleKeyUp
+} from './keyboard/inputHandlers.js';
+import { 
+    circleColladesWithRectangle, 
+    pacmanColladesWithGhost, 
+    pacmanColladesWithPellets, 
+    pacmanColladesWithPowerPellets
+} from './collisions/collisions.js';
 
 const beginBeepSound = new Audio('./assets/sounds/begin-beep.wav');
 const pluckSound = new Audio('./assets/sounds/pluck.wav');
@@ -50,20 +61,20 @@ function drawGameMessage(message) {
     c.fillText(message, canvas.width / 4, canvas.height / 2);   // text display
 }
 
-const keys = {
-    w: {
-        pressed: false
-    },
-    a: {
-        pressed: false
-    },
-    s: {
-        pressed: false
-    },
-    d: {
-        pressed: false
-    },
-};
+// const keys = {
+//     w: {
+//         pressed: false
+//     },
+//     a: {
+//         pressed: false
+//     },
+//     s: {
+//         pressed: false
+//     },
+//     d: {
+//         pressed: false
+//     },
+// };
 
 function createImage(source) {
     const image = new Image()
@@ -252,29 +263,29 @@ const ghosts = [
 //
 
 // collides between objects
-function circleColladesWithRectangle({
-    circle,
-    rectangle
-}) {
-    const padding = Boundary.width / 2 - circle.radius - 1
-    return (
-        circle.position.y - circle.radius + circle.velocity.y
-        <=
-        rectangle.position.y + rectangle.height + padding
-        &&
-        circle.position.x + circle.radius + circle.velocity.x
-        >=
-        rectangle.position.x - padding
-        &&
-        circle.position.y + circle.radius + circle.velocity.y
-        >=
-        rectangle.position.y - padding
-        &&
-        circle.position.x - circle.radius + circle.velocity.x
-        <=
-        rectangle.position.x + rectangle.width + padding
-    )
-};
+// function circleColladesWithRectangle({
+//     circle,
+//     rectangle
+// }) {
+//     const padding = Boundary.width / 2 - circle.radius - 1
+//     return (
+//         circle.position.y - circle.radius + circle.velocity.y
+//         <=
+//         rectangle.position.y + rectangle.height + padding
+//         &&
+//         circle.position.x + circle.radius + circle.velocity.x
+//         >=
+//         rectangle.position.x - padding
+//         &&
+//         circle.position.y + circle.radius + circle.velocity.y
+//         >=
+//         rectangle.position.y - padding
+//         &&
+//         circle.position.x - circle.radius + circle.velocity.x
+//         <=
+//         rectangle.position.x + rectangle.width + padding
+//     )
+// };
 //
 
 // warpTunnel position and actions
@@ -315,6 +326,26 @@ function warpTunnel({ unit, rightPosition, leftPosition }) {
     }
 }
 //
+export function soundReduce(sound, duration, volume, loop) {   // for sound effects
+    sound.currentTime = 0;                              // start playing from the beginning
+    sound.volume = volume;                              // sound volume | 0 - 1
+    sound.loop = loop;                                  // sound is played loop | true / false
+    sound.play().then(() => {
+        return setTimeout(() => {
+            sound.pause();                              // pause playback after
+        }, duration);                                   // duration milsec
+    })
+}
+
+function soundLoop(sound, volume) {                     // for endless music theme
+    sound.play();                                       // sound play
+    sound.volume = volume;                              // sound volume | 0 - 1 
+    sound.loop = false;                                 // ensure the music does not loop automatically
+    sound.addEventListener('ended', () => {
+        sound.currentTime = 0;                          // reset to the start
+        sound.play();                                   // sound play again
+    })
+};
 
 function animate() {
 
@@ -420,96 +451,78 @@ function animate() {
         }
     }
     // pac-man touches pallets
-    for (let i = pellets.length - 1; i >= 0; i--) {
-        const pellet = pellets[i]
+    pacmanColladesWithPellets(pacman, pellets, pluckSound);
+    // for (let i = pellets.length - 1; i >= 0; i--) {
+    //     const pellet = pellets[i]
 
-        pellet.draw()
-        if (Math.hypot(
-            pellet.position.x - pacman.position.x,
-            pellet.position.y - pacman.position.y
-        )
-            <
-            pellet.radius + (pacman.radius - pacman.radius / 1.5)) { // distance between pacman & pallet
-            pellets.splice(i, 1)
-            scoreCounter += 10                              // 10 pts for every pallet
-            pluckSound.play()                               // pluck sound
-            const score = document.getElementById('score')
-            score.innerText = scoreCounter
-        }
-    }
+    //     pellet.draw()
+    //     if (Math.hypot(
+    //         pellet.position.x - pacman.position.x,
+    //         pellet.position.y - pacman.position.y
+    //     )
+    //         <
+    //         pellet.radius + (pacman.radius - pacman.radius / 1.5)) { // distance between pacman & pallet
+    //         pellets.splice(i, 1)
+    //         scoreCounter += 10                              // 10 pts for every pallet
+    //         pluckSound.play()                               // pluck sound
+    //         const score = document.getElementById('score')
+    //         score.innerText = scoreCounter
+    //     }
+    // }
     //
-
-    function soundReduce(sound, duration, volume, loop) {   // for sound effects
-        sound.currentTime = 0;                              // start playing from the beginning
-        sound.volume = volume;                              // sound volume | 0 - 1
-        sound.loop = loop;                                  // sound is played loop | true / false
-        sound.play().then(() => {
-            return setTimeout(() => {
-                sound.pause();                              // pause playback after
-            }, duration);                                   // duration milsec
-        })
-    }
-
-    function soundLoop(sound, volume) {                     // for endless music theme
-        sound.play();                                       // sound play
-        sound.volume = volume;                              // sound volume | 0 - 1 
-        sound.loop = false;                                 // ensure the music does not loop automatically
-        sound.addEventListener('ended', () => {
-            sound.currentTime = 0;                          // reset to the start
-            sound.play();                                   // sound play again
-        })
-    };
 
     // pac-man touches powerPellets
-    for (let i = powerPellets.length - 1; i >= 0; i--) {
-        const powerPellet = powerPellets[i]
+    pacmanColladesWithPowerPellets(pacman, powerPellets, pluckSound, ghosts, siren, powerEffectDuration, 0.5, true);
+    // for (let i = powerPellets.length - 1; i >= 0; i--) {
+    //     const powerPellet = powerPellets[i]
 
-        powerPellet.draw()
-        if (Math.hypot(
-            powerPellet.position.x - pacman.position.x,
-            powerPellet.position.y - pacman.position.y
-        )
-            <
-            powerPellet.radius + (pacman.radius - pacman.radius / 1.5)) { // distance between pacman & pallet
-            powerPellets.splice(i, 1)
-            scoreCounter += 50                                      // 50 pts for every power pallet
-            pluckSound.play()                                       // pluck sound
-            soundReduce(siren, powerEffectDuration, 0.5, true)      // siren sound           
-            const score = document.getElementById('score')
-            score.innerText = scoreCounter
-            // make ghosts scary
-            ghosts.forEach(ghost => {
-                ghost.scared = true
-                setTimeout(() => {
-                    ghost.scared = false
-                }, powerEffectDuration);
-            })
-            //
-        }
-    }
+    //     powerPellet.draw()
+    //     if (Math.hypot(
+    //         powerPellet.position.x - pacman.position.x,
+    //         powerPellet.position.y - pacman.position.y
+    //     )
+    //         <
+    //         powerPellet.radius + (pacman.radius - pacman.radius / 1.5)) { // distance between pacman & pallet
+    //         powerPellets.splice(i, 1)
+    //         scoreCounter += 50                                      // 50 pts for every power pallet
+    //         pluckSound.play()                                       // pluck sound
+    //         soundReduce(siren, powerEffectDuration, 0.5, true)      // siren sound           
+    //         const score = document.getElementById('score')
+    //         score.innerText = scoreCounter
+    //         // make ghosts scary
+    //         ghosts.forEach(ghost => {
+    //             ghost.scared = true
+    //             setTimeout(() => {
+    //                 ghost.scared = false
+    //             }, powerEffectDuration);
+    //         })
+    //         //
+    //     }
+    // }
     //
     // detect collision between ghost & pac-man
-    for (let i = ghosts.length - 1; i >= 0; i--) {
-        const ghost = ghosts[i]
-        // ghost touches pac-man
-        if (Math.hypot(                             // calculates distance between (0,0) and (x,y)
-            ghost.position.x - pacman.position.x,
-            ghost.position.y - pacman.position.y
-        ) < ghost.radius + pacman.radius
-        ) {
-            if (ghost.scared) {
-                ghosts.splice(i, 1);
-                scoreCounter += 200;                // 200 pts for every power ghost
-                const score = document.getElementById('score')
-                score.innerText = scoreCounter
-            }
-            else {
-                isGame = false;
-                loseSound.play()                    // sound           
-                cancelAnimationFrame(animationId)   // stop animation  
-            }
-        }
-    }
+    pacmanColladesWithGhost(pacman, ghosts, loseSound, animationId);
+    // for (let i = ghosts.length - 1; i >= 0; i--) {
+    //     const ghost = ghosts[i]
+    //     // ghost touches pac-man
+    //     if (Math.hypot(                             // calculates distance between (0,0) and (x,y)
+    //         ghost.position.x - pacman.position.x,
+    //         ghost.position.y - pacman.position.y
+    //     ) < ghost.radius + pacman.radius
+    //     ) {
+    //         if (ghost.scared) {
+    //             ghosts.splice(i, 1);
+    //             scoreCounter += 200;                // 200 pts for every power ghost
+    //             const score = document.getElementById('score')
+    //             score.innerText = scoreCounter
+    //         }
+    //         else {
+    //             isGame = false;
+    //             loseSound.play()                    // sound           
+    //             cancelAnimationFrame(animationId)   // stop animation  
+    //         }
+    //     }
+    // }
     //
     // draw boundaries
     boundaries.forEach((boundary) => {
@@ -671,8 +684,6 @@ function animate() {
             };
 
             ghost.direction = currentDirection;
-            console.log(ghost.color + '  -  ' + currentDirection);
-            
                         // 
             ghost.prevCollisions = []
         }
@@ -698,43 +709,44 @@ function animate() {
 
 animate();
 
-window.addEventListener('keydown', ({ key }) => {
-    switch (key) {
-        case 'w':
-            keys.w.pressed = true
-            lastKey = 'w'
-            break
-        case 'a':
-            keys.a.pressed = true
-            lastKey = 'a'
-            break
-        case 's':
-            keys.s.pressed = true
-            lastKey = 's'
-            break
-        case 'd':
-            keys.d.pressed = true
-            lastKey = 'd'
-            break
-    }
-});
+// window.addEventListener('keydown', ({ key }) => {
+//     switch (key) {
+//         case 'w':
+//             keys.w.pressed = true
+//             lastKey = 'w'
+//             break
+//         case 'a':
+//             keys.a.pressed = true
+//             lastKey = 'a'
+//             break
+//         case 's':
+//             keys.s.pressed = true
+//             lastKey = 's'
+//             break
+//         case 'd':
+//             keys.d.pressed = true
+//             lastKey = 'd'
+//             break
+//     }
+// });
 
-window.addEventListener('keyup', ({ key }) => {
-    switch (key) {
-        case 'w':
-            keys.w.pressed = false
-            break
-        case 'a':
-            keys.a.pressed = false
-            break
-        case 's':
-            keys.s.pressed = false
-            break
-        case 'd':
-            keys.d.pressed = false
-            break
-    }
-});
+// window.addEventListener('keyup', ({ key }) => {
+//     switch (key) {
+//         case 'w':
+//             keys.w.pressed = false
+//             break
+//         case 'a':
+//             keys.a.pressed = false
+//             break
+//         case 's':
+//             keys.s.pressed = false
+//             break
+//         case 'd':
+//             keys.d.pressed = false
+//             break
+//     }
+// });
 
-
+window.addEventListener('keydown', handleKeyDown);
+window.addEventListener('keyup', handleKeyUp);
 
