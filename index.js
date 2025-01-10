@@ -706,11 +706,7 @@ function animate() {
     }
 
 };
-
-// canvas.focus();
-
-animate();
-
+//
 window.addEventListener('keydown', ({ key }) => {
     switch (key) {
         case 'w':
@@ -752,3 +748,10 @@ window.addEventListener('keyup', ({ key }) => {
 // window.addEventListener('keydown', handleKeyDown);
 // window.addEventListener('keyup', handleKeyUp);
 console.log(pacman.velocity);
+
+function startGame() {
+    canvas.focus();
+    animate();
+};
+
+startGame();
