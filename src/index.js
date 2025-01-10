@@ -24,10 +24,17 @@ import {
     handleKeyUp
 } from './keyboard/inputHandlers.js';
 import { 
+<<<<<<< HEAD
     circleColladesWithRectangle, 
     pacmanColladesWithGhost, 
     pacmanColladesWithPellets, 
     pacmanColladesWithPowerPellets
+=======
+    circleColladesWithRectangle 
+    // pacmanColladesWithGhost, 
+    // pacmanColladesWithPellets, 
+    // pacmanColladesWithPowerPellets
+>>>>>>> c1aee76 (Update .gitignore to include inputHandlers and collisions files; refactor collision detection logic for clarity)
 } from './collisions/collisions.js';
 
 const beginBeepSound = new Audio('./assets/sounds/begin-beep.wav');
@@ -451,80 +458,79 @@ function animate() {
         }
     }
     // pac-man touches pallets
-    pacmanColladesWithPellets(pacman, pellets, pluckSound);
-    // for (let i = pellets.length - 1; i >= 0; i--) {
-    //     const pellet = pellets[i]
+    // pacmanColladesWithPellets(pacman, pellets, pluckSound);
+    for (let i = pellets.length - 1; i >= 0; i--) {
+        const pellet = pellets[i]
 
-    //     pellet.draw()
-    //     if (Math.hypot(
-    //         pellet.position.x - pacman.position.x,
-    //         pellet.position.y - pacman.position.y
-    //     )
-    //         <
-    //         pellet.radius + (pacman.radius - pacman.radius / 1.5)) { // distance between pacman & pallet
-    //         pellets.splice(i, 1)
-    //         scoreCounter += 10                              // 10 pts for every pallet
-    //         pluckSound.play()                               // pluck sound
-    //         const score = document.getElementById('score')
-    //         score.innerText = scoreCounter
-    //     }
-    // }
+        pellet.draw()
+        if (Math.hypot(
+            pellet.position.x - pacman.position.x,
+            pellet.position.y - pacman.position.y
+        )
+            <
+            pellet.radius + (pacman.radius - pacman.radius / 1.5)) { // distance between pacman & pallet
+            pellets.splice(i, 1)
+            scoreCounter += 10                              // 10 pts for every pallet
+            pluckSound.play()                               // pluck sound
+            const score = document.getElementById('score')
+            score.innerText = scoreCounter
+        }
+    }
     //
 
     // pac-man touches powerPellets
-    pacmanColladesWithPowerPellets(pacman, powerPellets, pluckSound, ghosts, siren, powerEffectDuration, 0.5, true);
-    // for (let i = powerPellets.length - 1; i >= 0; i--) {
-    //     const powerPellet = powerPellets[i]
+    // pacmanColladesWithPowerPellets(pacman, powerPellets, pluckSound, ghosts, siren, powerEffectDuration, 0.5, true);
+    for (let i = powerPellets.length - 1; i >= 0; i--) {
+        const powerPellet = powerPellets[i]
 
-    //     powerPellet.draw()
-    //     if (Math.hypot(
-    //         powerPellet.position.x - pacman.position.x,
-    //         powerPellet.position.y - pacman.position.y
-    //     )
-    //         <
-    //         powerPellet.radius + (pacman.radius - pacman.radius / 1.5)) { // distance between pacman & pallet
-    //         powerPellets.splice(i, 1)
-    //         scoreCounter += 50                                      // 50 pts for every power pallet
-    //         pluckSound.play()                                       // pluck sound
-    //         soundReduce(siren, powerEffectDuration, 0.5, true)      // siren sound           
-    //         const score = document.getElementById('score')
-    //         score.innerText = scoreCounter
-    //         // make ghosts scary
-    //         ghosts.forEach(ghost => {
-    //             ghost.scared = true
-    //             setTimeout(() => {
-    //                 ghost.scared = false
-    //             }, powerEffectDuration);
-    //         })
-    //         //
-    //     }
-    // }
+        powerPellet.draw()
+        if (Math.hypot(
+            powerPellet.position.x - pacman.position.x,
+            powerPellet.position.y - pacman.position.y
+        )
+            <
+            powerPellet.radius + (pacman.radius - pacman.radius / 1.5)) { // distance between pacman & pallet
+            powerPellets.splice(i, 1)
+            scoreCounter += 50                                      // 50 pts for every power pallet
+            pluckSound.play()                                       // pluck sound
+            soundReduce(siren, powerEffectDuration, 0.5, true)      // siren sound           
+            const score = document.getElementById('score')
+            score.innerText = scoreCounter
+            // make ghosts scary
+            ghosts.forEach(ghost => {
+                ghost.scared = true
+                setTimeout(() => {
+                    ghost.scared = false
+                }, powerEffectDuration);
+            })
+            //
+        }
+    }
     //
     // detect collision between ghost & pac-man
-    pacmanColladesWithGhost(pacman, ghosts, loseSound, animationId);
-    // for (let i = ghosts.length - 1; i >= 0; i--) {
-    //     const ghost = ghosts[i]
-    //     // ghost touches pac-man
-    //     if (Math.hypot(                             // calculates distance between (0,0) and (x,y)
-    //         ghost.position.x - pacman.position.x,
-    //         ghost.position.y - pacman.position.y
-    //     ) < ghost.radius + pacman.radius
-    //     ) {
-    //         if (ghost.scared) {
-    //             ghosts.splice(i, 1);
-    //             scoreCounter += 200;                // 200 pts for every power ghost
-    //             const score = document.getElementById('score')
-    //             score.innerText = scoreCounter
-    //         }
-    //         else {
-    //             isGame = false;
-    //             loseSound.play()                    // sound           
-    //             cancelAnimationFrame(animationId)   // stop animation  
-    //         }
-    //     }
-    // }
+    // pacmanColladesWithGhost(pacman, ghosts, loseSound, animationId);
+    for (let i = ghosts.length - 1; i >= 0; i--) {
+        const ghost = ghosts[i]
+        // ghost touches pac-man
+        if (Math.hypot(                             // calculates distance between (0,0) and (x,y)
+            ghost.position.x - pacman.position.x,
+            ghost.position.y - pacman.position.y
+        ) < ghost.radius + pacman.radius
+        ) {
+            if (ghost.scared) {
+                ghosts.splice(i, 1);
+                scoreCounter += 200;                // 200 pts for every power ghost
+                const score = document.getElementById('score')
+                score.innerText = scoreCounter
+            }
+            else {
+                isGame = false;
+                loseSound.play()                    // sound           
+                cancelAnimationFrame(animationId)   // stop animation  
+            }
+        }
+    }
     //
-    if (!isGame) return;
     // draw boundaries
     boundaries.forEach((boundary) => {
         boundary.draw()
@@ -750,4 +756,3 @@ animate();
 
 window.addEventListener('keydown', handleKeyDown);
 window.addEventListener('keyup', handleKeyUp);
-
