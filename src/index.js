@@ -24,17 +24,10 @@ import {
     handleKeyUp
 } from './keyboard/inputHandlers.js';
 import { 
-<<<<<<< HEAD
     circleColladesWithRectangle, 
-    pacmanColladesWithGhost, 
-    pacmanColladesWithPellets, 
-    pacmanColladesWithPowerPellets
-=======
-    circleColladesWithRectangle 
     // pacmanColladesWithGhost, 
     // pacmanColladesWithPellets, 
     // pacmanColladesWithPowerPellets
->>>>>>> c1aee76 (Update .gitignore to include inputHandlers and collisions files; refactor collision detection logic for clarity)
 } from './collisions/collisions.js';
 
 const beginBeepSound = new Audio('./assets/sounds/begin-beep.wav');
