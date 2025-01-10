@@ -24,7 +24,7 @@ import {
     handleKeyUp
 } from './keyboard/inputHandlers.js';
 import { 
-    circleColladesWithRectangle 
+    circleColladesWithRectangle, 
     // pacmanColladesWithGhost, 
     // pacmanColladesWithPellets, 
     // pacmanColladesWithPowerPellets
